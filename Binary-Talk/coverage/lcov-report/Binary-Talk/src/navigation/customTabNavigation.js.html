@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Binary-Talk/src/navigation/customTabNavigation.js</title>
+    <title>Code coverage report for Binary-Talk/src/navigation/CustomTabNavigation.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">Binary-Talk/src/navigation</a> customTabNavigation.js</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">Binary-Talk/src/navigation</a> CustomTabNavigation.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -54,6 +54,12 @@
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
     </div>
     <div class='status-line low'></div>
     <pre><table class="coverage">
@@ -109,12 +115,7 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,17 +133,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,56 +173,51 @@ import "react-native-gesture-handler";
 import toBinaryView from "../components/toBinaryView/index";
 import toTextView from "../components/toTextView/index";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import i18n from "i18n-js";
+import { I18n } from "i18n-js";
 import * as fr from "../localization/fr.json";
 import * as en from "../localization/en.json";
-import * as Localization from "expo-localization";
+import { getLocales } from "expo-localization";
 const Tab = <span class="cstat-no" title="statement not covered" >createMaterialTopTabNavigator();</span>
-//TODO: Custom tab navigation
-export const customTabNavigation = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >	i18n.translations = {</span>
-		fr: fr,
-		["fr-FR"]: fr,
-		en: en,
-	};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	i18n.locale = Localization.locale;</span>
-<span class="cstat-no" title="statement not covered" >	i18n.fallbacks = true;</span>
-	//let toBinary = {i18n.t("navigation.toBinary")};
+export const CustomTabNavigation = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {</span>
+  const translations = <span class="cstat-no" title="statement not covered" >{</span>
+    fr: fr,
+    ["fr-FR"]: fr,
+    en: en,
+  };
+  const i18n = <span class="cstat-no" title="statement not covered" >new I18n(translations);</span>
 &nbsp;
-	/*
-				activeTintColor: "#2ecc71",
-				indicatorStyle: {
-					backgroundColor: "#2ecc71",
-				},
-	*/
+  // Set the locale once at the beginning of your app.
+<span class="cstat-no" title="statement not covered" >  i18n.locale = getLocales()[0].languageCode ?? "en";</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	return (</span>
-		&lt;Tab.Navigator
-			style={styles.container}
-			tabBarOptions={{
-				labelStyle: {
-					fontSize: 12,
-				},
-				indicatorStyle: {
-					marginBottom: 5,
-					backgroundColor: "white",
-				},
-				tabStyle: {
-					height: 60,
-				},
-			}}
-		&gt;
-			&lt;Tab.Screen name={i18n.t("navigation.toBin")} component={toBinaryView} /&gt;
-			&lt;Tab.Screen name={i18n.t("navigation.toTxt")} component={toTextView} /&gt;
-		&lt;/Tab.Navigator&gt;
-	);
+<span class="cstat-no" title="statement not covered" >  i18n.fallbacks = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;Tab.Navigator
+      style={styles.container}
+      tabBarOptions={{
+        labelStyle: {
+          fontSize: 12,
+        },
+        indicatorStyle: {
+          marginBottom: 5,
+          backgroundColor: "white",
+        },
+        tabStyle: {
+          height: 60,
+        },
+      }}
+    &gt;
+      &lt;Tab.Screen name={i18n.t("navigation.toBin")} component={toBinaryView} /&gt;
+      &lt;Tab.Screen name={i18n.t("navigation.toTxt")} component={toTextView} /&gt;
+    &lt;/Tab.Navigator&gt;
+  );
 };
 &nbsp;
 const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
-	container: {
-		//backgroundColor: "#2ecc71",
-	},
+  container: {
+    //backgroundColor: "#2ecc71",
+  },
 });
 &nbsp;</pre></td></tr></table></pre>
 
@@ -234,10 +225,9 @@ const styles = <span class="cstat-no" title="statement not covered" >StyleSheet.
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 16 2021 19:10:12 GMT-0400 (heure d’été de l’Est)
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-07-24T20:08:49.968Z
             </div>
-        </div>
         <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {

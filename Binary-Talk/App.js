@@ -17,19 +17,14 @@ import Store, { Context } from "./src/state/store";
 i18n = Lib pour traduire l'application 
 */
 
-// Set the locale once at the beginning of your app.
-i18n.locale = Localization.locale;
-// When a value is missing from a language it'll fallback to another language with the key present.
-i18n.fallbacks = true;
-
 export default function App() {
-	return (
-		<Store>
-			<EntryPoint />
-		</Store>
-	);
+  return (
+    <Store>
+      <EntryPoint />
+    </Store>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {},
+  container: {},
 });

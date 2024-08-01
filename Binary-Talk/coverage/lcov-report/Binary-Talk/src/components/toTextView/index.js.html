@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>0/33</span>
             </div>
         
             
@@ -54,6 +54,12 @@
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
     </div>
     <div class='status-line low'></div>
     <pre><table class="coverage">
@@ -248,7 +254,11 @@
 <a name='L189'></a><a href='#L189'>189</a>
 <a name='L190'></a><a href='#L190'>190</a>
 <a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L192'></a><a href='#L192'>192</a>
+<a name='L193'></a><a href='#L193'>193</a>
+<a name='L194'></a><a href='#L194'>194</a>
+<a name='L195'></a><a href='#L195'>195</a>
+<a name='L196'></a><a href='#L196'>196</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -278,6 +288,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -441,13 +455,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect } from "react";
 import {
-	SafeAreaView,
-	Text,
-	TextInput,
-	StyleSheet,
-	View,
-	ScrollView,
-	ToastAndroid,
+  SafeAreaView,
+  Text,
+  TextInput,
+  StyleSheet,
+  View,
+  ScrollView,
+  ToastAndroid,
 } from "react-native";
 &nbsp;
 import { _utf8ToBin, _binaryToTxt } from "../../api/conversion";
@@ -456,178 +470,182 @@ import * as Clipboard from "expo-clipboard";
 import { onShare } from "../../api/functions";
 import { FontAwesome } from "@expo/vector-icons";
 &nbsp;
-import * as Localization from "expo-localization";
-import i18n from "i18n-js";
+import { I18n } from "i18n-js";
+import { getLocales } from "expo-localization";
 import * as fr from "../../localization/fr.json";
 import * as en from "../../localization/en.json";
 &nbsp;
 const toTextView = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >	i18n.translations = {</span>
-		fr: fr,
-		["fr-FR"]: fr,
-		en: en,
-	};
+  const translations = <span class="cstat-no" title="statement not covered" >{</span>
+    fr: fr,
+    ["fr-FR"]: fr,
+    en: en,
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	i18n.locale = Localization.locale;</span>
-<span class="cstat-no" title="statement not covered" >	i18n.fallbacks = true;</span>
+  const i18n = <span class="cstat-no" title="statement not covered" >new I18n(translations);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	defaultData = i18n.t("defaultData.defaultBin");</span>
-	const [value, onChangeText] = <span class="cstat-no" title="statement not covered" >useState(defaultData);</span>
-	const [txt, onChangeTxt] = <span class="cstat-no" title="statement not covered" >useState("Du texte");</span>
+  // Set the locale once at the beginning of your app.
+<span class="cstat-no" title="statement not covered" >  i18n.locale = getLocales()[0].languageCode ?? "en";</span>
 &nbsp;
-	const copyToClipboard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		Clipboard.setString(txt);</span>
-	};
+<span class="cstat-no" title="statement not covered" >  i18n.fallbacks = true;</span>
 &nbsp;
-	const _isBinary = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
-		const regex = <span class="cstat-no" title="statement not covered" >new RegExp("^[0-1]{1,}$");</span>
-<span class="cstat-no" title="statement not covered" >		if (regex.test(txt)) {</span>
-<span class="cstat-no" title="statement not covered" >			return true;</span>
-		}
-<span class="cstat-no" title="statement not covered" >		return false;</span>
-	};
+<span class="cstat-no" title="statement not covered" >  defaultData = i18n.t("defaultData.defaultBin");</span>
+  const [value, onChangeText] = <span class="cstat-no" title="statement not covered" >useState(defaultData);</span>
+  const [txt, onChangeTxt] = <span class="cstat-no" title="statement not covered" >useState("Du texte");</span>
 &nbsp;
-	const _safeOnChangeText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		if (_isBinary(txt)) {</span>
-<span class="cstat-no" title="statement not covered" >			onChangeText(txt);</span>
-		} else {
-<span class="cstat-no" title="statement not covered" >			ToastAndroid.show(i18n.t("error.copy_nonbinary"), ToastAndroid.SHORT);</span>
-		}
-	};
+  const copyToClipboard = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    Clipboard.setString(txt);</span>
+  };
 &nbsp;
-	const fetchCopiedText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
-		const text = <span class="cstat-no" title="statement not covered" >await Clipboard.getStringAsync();</span>
-<span class="cstat-no" title="statement not covered" >		if (_isBinary(text)) {</span>
-<span class="cstat-no" title="statement not covered" >			onChangeText(text);</span>
-		} else {
-<span class="cstat-no" title="statement not covered" >			ToastAndroid.show(i18n.t("error.copy_nonbinary"), ToastAndroid.SHORT);</span>
-		}
-	};
+  const _isBinary = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
+    const regex = <span class="cstat-no" title="statement not covered" >new RegExp("^[0-1]{1,}$");</span>
+<span class="cstat-no" title="statement not covered" >    if (regex.test(txt)) {</span>
+<span class="cstat-no" title="statement not covered" >      return true;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return false;</span>
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		onChangeTxt(_binaryToTxt(value));</span>
-	});
+  const _safeOnChangeText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>xt) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (_isBinary(txt)) {</span>
+<span class="cstat-no" title="statement not covered" >      onChangeText(txt);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      ToastAndroid.show(i18n.t("error.copy_nonbinary"), ToastAndroid.SHORT);</span>
+    }
+  };
 &nbsp;
-	const clearText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >		onChangeText("");</span>
-<span class="cstat-no" title="statement not covered" >		onChangeTxt("");</span>
-	};
+  const fetchCopiedText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
+    const text = <span class="cstat-no" title="statement not covered" >await Clipboard.getStringAsync();</span>
+<span class="cstat-no" title="statement not covered" >    if (_isBinary(text)) {</span>
+<span class="cstat-no" title="statement not covered" >      onChangeText(text);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      ToastAndroid.show(i18n.t("error.copy_nonbinary"), ToastAndroid.SHORT);</span>
+    }
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >	return (</span>
-		&lt;SafeAreaView style={Styles.container}&gt;
-			&lt;View style={Styles.subContainer}&gt;
-				&lt;View style={Styles.customTextInputContainer}&gt;
-					&lt;TextInput
-						value={value}
-						multiline={true}
-						onChangeText={_safeOnChangeText}
-						keyboardType={"numeric"}
-						style={Styles.textInput}
-					/&gt;
-					{txt ? (
-						&lt;FontAwesome
-							name="remove"
-							size={30}
-							color="black"
-							onPress={clearText}
-						/&gt;
-					) : null}
-				&lt;/View&gt;
-				&lt;Text&gt;{i18n.t("view.showTxt")}&lt;/Text&gt;
-				&lt;ScrollView&gt;
-					&lt;Text style={Styles.textBinaire}&gt;{txt}&lt;/Text&gt;
-				&lt;/ScrollView&gt;
-			&lt;/View&gt;
-			&lt;View style={Styles.subContainerAction}&gt;
-				&lt;FontAwesome.Button
-					disabled={txt ? false : true}
-					backgroundColor="rgba(52, 52, 52, 0)"
-					underlayColor="#bdc3c7"
-					name="copy"
-					title="Copier"
-					color="black"
-					onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >copyToClipboard(txt)}</span>
-				&gt;
-					{i18n.t("actions.copy")}
-				&lt;/FontAwesome.Button&gt;
-				&lt;FontAwesome.Button
-					underlayColor="#bdc3c7"
-					backgroundColor="rgba(52, 52, 52, 0)"
-					name="paste"
-					title="Coller"
-					color="black"
-					onPress={fetchCopiedText}
-				&gt;
-					{i18n.t("actions.paste")}
-				&lt;/FontAwesome.Button&gt;
-				&lt;FontAwesome.Button
-					disabled={txt ? false : true}
-					backgroundColor="rgba(52, 52, 52, 0)"
-					underlayColor="#bdc3c7"
-					name="share"
-					title="Partager"
-					color="black"
-					onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onShare(txt)}</span>
-				&gt;
-					{i18n.t("actions.share")}
-				&lt;/FontAwesome.Button&gt;
-			&lt;/View&gt;
-		&lt;/SafeAreaView&gt;
-	);
+<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    onChangeTxt(_binaryToTxt(value));</span>
+  });
+&nbsp;
+  const clearText = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    onChangeText("");</span>
+<span class="cstat-no" title="statement not covered" >    onChangeTxt("");</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;SafeAreaView style={Styles.container}&gt;
+      &lt;View style={Styles.subContainer}&gt;
+        &lt;View style={Styles.customTextInputContainer}&gt;
+          &lt;TextInput
+            value={value}
+            multiline={true}
+            onChangeText={_safeOnChangeText}
+            keyboardType={"numeric"}
+            style={Styles.textInput}
+          /&gt;
+          {txt ? (
+            &lt;FontAwesome
+              name="remove"
+              size={30}
+              color="black"
+              onPress={clearText}
+            /&gt;
+          ) : null}
+        &lt;/View&gt;
+        &lt;Text&gt;{i18n.t("view.showTxt")}&lt;/Text&gt;
+        &lt;ScrollView&gt;
+          &lt;Text style={Styles.textBinaire}&gt;{txt}&lt;/Text&gt;
+        &lt;/ScrollView&gt;
+      &lt;/View&gt;
+      &lt;View style={Styles.subContainerAction}&gt;
+        &lt;FontAwesome.Button
+          disabled={txt ? false : true}
+          backgroundColor="rgba(52, 52, 52, 0)"
+          underlayColor="#bdc3c7"
+          name="copy"
+          title="Copier"
+          color="black"
+          onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >copyToClipboard(txt)}</span>
+        &gt;
+          {i18n.t("actions.copy")}
+        &lt;/FontAwesome.Button&gt;
+        &lt;FontAwesome.Button
+          underlayColor="#bdc3c7"
+          backgroundColor="rgba(52, 52, 52, 0)"
+          name="paste"
+          title="Coller"
+          color="black"
+          onPress={fetchCopiedText}
+        &gt;
+          {i18n.t("actions.paste")}
+        &lt;/FontAwesome.Button&gt;
+        &lt;FontAwesome.Button
+          disabled={txt ? false : true}
+          backgroundColor="rgba(52, 52, 52, 0)"
+          underlayColor="#bdc3c7"
+          name="share"
+          title="Partager"
+          color="black"
+          onPress={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onShare(txt)}</span>
+        &gt;
+          {i18n.t("actions.share")}
+        &lt;/FontAwesome.Button&gt;
+      &lt;/View&gt;
+    &lt;/SafeAreaView&gt;
+  );
 };
 &nbsp;
 const Styles = <span class="cstat-no" title="statement not covered" >StyleSheet.create({</span>
-	container: {
-		flex: 1,
-		margin: 15,
-		//backgroundColor: "grey",
-	},
-	subContainer: {
-		flex: 1,
-		flexDirection: "column",
-		//backgroundColor: 'blue',
-		alignItems: "center",
-		alignContent: "flex-start",
-		flexGrow: 4,
-	},
-	textInput: {
-		flexShrink: 1,
-		maxHeight: 80,
-		borderBottomColor: "grey",
-		borderBottomWidth: 1,
-		fontSize: 25,
-		flexWrap: "wrap",
-		//backgroundColor: "grey",
-		flexGrow: 1,
-		color: "black",
-	},
-	textBinaire: {
-		color: "black",
-		//debug : color: 'white',
-		fontSize: 15,
-	},
-	subContainerAction: {
-		flex: 1,
-		justifyContent: "space-between",
-		alignItems: "flex-end",
-		flexDirection: "row",
-		//backgroundColor: "red",
-	},
-	customTextInputContainer: {
-		justifyContent: "space-between",
-		flex: 1,
-		flexDirection: "row",
-		alignItems: "flex-start",
-	},
-	customTextInput: {
-		//backgroundColor: "blue",
-	},
-	binaryContainer: {
-		//backgroundColor: 'grey',
-		flex: 1,
-		flexWrap: "wrap",
-		flexGrow: 1,
-	},
+  container: {
+    flex: 1,
+    margin: 15,
+    //backgroundColor: "grey",
+  },
+  subContainer: {
+    flex: 1,
+    flexDirection: "column",
+    //backgroundColor: 'blue',
+    alignItems: "center",
+    alignContent: "flex-start",
+    flexGrow: 4,
+  },
+  textInput: {
+    flexShrink: 1,
+    maxHeight: 80,
+    borderBottomColor: "grey",
+    borderBottomWidth: 1,
+    fontSize: 25,
+    flexWrap: "wrap",
+    //backgroundColor: "grey",
+    flexGrow: 1,
+    color: "black",
+  },
+  textBinaire: {
+    color: "black",
+    //debug : color: 'white',
+    fontSize: 15,
+  },
+  subContainerAction: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    flexDirection: "row",
+    //backgroundColor: "red",
+  },
+  customTextInputContainer: {
+    justifyContent: "space-between",
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "flex-start",
+  },
+  customTextInput: {
+    //backgroundColor: "blue",
+  },
+  binaryContainer: {
+    //backgroundColor: 'grey',
+    flex: 1,
+    flexWrap: "wrap",
+    flexGrow: 1,
+  },
 });
 export default toTextView;
 &nbsp;</pre></td></tr></table></pre>
@@ -636,10 +654,9 @@ export default toTextView;
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 16 2021 19:10:12 GMT-0400 (heure d’été de l’Est)
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-07-24T20:08:49.968Z
             </div>
-        </div>
         <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {

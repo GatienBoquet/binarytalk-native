@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.52% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/21</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">9.52% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/21</span>
+                <span class='fraction'>0/21</span>
             </div>
         
             
@@ -54,6 +54,12 @@
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
     </div>
     <div class='status-line low'></div>
     <pre><table class="coverage">
@@ -92,28 +98,10 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,10 +109,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,37 +137,36 @@
 Source : http://jsfiddle.net/47zwb41o
 */
 &nbsp;
-export const _utf8ToBin = <span class="fstat-no" title="function not covered" >(s</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >	s = unescape(encodeURIComponent(s));</span>
-	var chr,
-		i = <span class="cstat-no" title="statement not covered" >0,</span>
-		l = <span class="cstat-no" title="statement not covered" >s.length,</span>
-		out = <span class="cstat-no" title="statement not covered" >"";</span>
-<span class="cstat-no" title="statement not covered" >	for (; i &lt; l; i++) {</span>
-<span class="cstat-no" title="statement not covered" >		chr = s.charCodeAt(i).toString(2);</span>
-<span class="cstat-no" title="statement not covered" >		while (chr.length % 8 != 0) {</span>
-<span class="cstat-no" title="statement not covered" >			chr = "0" + chr;</span>
-		}
-<span class="cstat-no" title="statement not covered" >		out += chr;</span>
-	}
-<span class="cstat-no" title="statement not covered" >	return out;</span>
+export const _utf8ToBin = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  s = unescape(encodeURIComponent(s));</span>
+  var chr,
+    i = <span class="cstat-no" title="statement not covered" >0,</span>
+    l = <span class="cstat-no" title="statement not covered" >s.length,</span>
+    out = <span class="cstat-no" title="statement not covered" >"";</span>
+<span class="cstat-no" title="statement not covered" >  for (; i &lt; l; i++) {</span>
+<span class="cstat-no" title="statement not covered" >    chr = s.charCodeAt(i).toString(2);</span>
+<span class="cstat-no" title="statement not covered" >    while (chr.length % 8 != 0) {</span>
+<span class="cstat-no" title="statement not covered" >      chr = "0" + chr;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    out += chr;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return out;</span>
 };
 &nbsp;
-export const _binaryToTxt = <span class="fstat-no" title="function not covered" >(s</span>) =&gt; {
-	var i = <span class="cstat-no" title="statement not covered" >0,</span>
-		l = <span class="cstat-no" title="statement not covered" >s.length,</span>
-		chr,
-		out = <span class="cstat-no" title="statement not covered" >"";</span>
-<span class="cstat-no" title="statement not covered" >	for (; i &lt; l; i += 8) {</span>
-<span class="cstat-no" title="statement not covered" >		chr = parseInt(s.substr(i, 8), 2).toString(16);</span>
-<span class="cstat-no" title="statement not covered" >		out += "%" + (chr.length % 2 == 0 ? chr : "0" + chr);</span>
-	}
-<span class="cstat-no" title="statement not covered" >	try {</span>
-<span class="cstat-no" title="statement not covered" >		return decodeURIComponent(out);</span>
-	} catch (error) {
-		//console.log(error);
-<span class="cstat-no" title="statement not covered" >		return out.toString();</span>
-	}
+export const _binaryToTxt = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(s</span>) =&gt; {</span>
+  var i = <span class="cstat-no" title="statement not covered" >0,</span>
+    l = <span class="cstat-no" title="statement not covered" >s.length,</span>
+    chr,
+    out = <span class="cstat-no" title="statement not covered" >"";</span>
+<span class="cstat-no" title="statement not covered" >  for (; i &lt; l; i += 8) {</span>
+<span class="cstat-no" title="statement not covered" >    chr = parseInt(s.substr(i, 8), 2).toString(16);</span>
+<span class="cstat-no" title="statement not covered" >    out += "%" + (chr.length % 2 == 0 ? chr : "0" + chr);</span>
+  }
+<span class="cstat-no" title="statement not covered" >  try {</span>
+<span class="cstat-no" title="statement not covered" >    return decodeURIComponent(out);</span>
+  } catch (error) {
+<span class="cstat-no" title="statement not covered" >    return out.toString();</span>
+  }
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -171,10 +174,9 @@ export const _binaryToTxt = <span class="fstat-no" title="function not covered" 
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Jul 16 2021 19:10:12 GMT-0400 (heure d’été de l’Est)
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2024-07-24T20:08:49.968Z
             </div>
-        </div>
         <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
