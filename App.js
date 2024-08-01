@@ -22,7 +22,3 @@ export default function App() {
     </Store>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
