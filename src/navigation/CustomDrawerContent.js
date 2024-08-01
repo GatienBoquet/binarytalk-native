@@ -27,7 +27,7 @@ Pour afficher les screens :
 const modalTextTitle = "Binary Talk";
 const modalTextBottom = "Gatien Boquet \n 2024";
 
-const CustomDrawerContent = (props) => {
+const CustomDrawerContent = () => {
   const translations = {
     fr: fr,
     ["fr-FR"]: fr,
@@ -104,11 +104,10 @@ const CustomDrawerContent = (props) => {
   }
 
   return (
-    <DrawerContentScrollView {...props} style={styles.container}>
+    <DrawerContentScrollView style={styles.container}>
       <View styles={styles.subContainer}>
         <Text style={styles.drawerTitle}>Binary Talk 3.0</Text>
         <DrawerItem
-          {...props}
           style={styles.drawerItem}
           label={i18n.t("drawer.Item_1")}
           labelStyle={{
@@ -117,7 +116,6 @@ const CustomDrawerContent = (props) => {
           onPress={() => setModalVisible(true)}
         />
         <DrawerItem
-          {...props}
           labelStyle={{
             color: "white",
           }}
@@ -125,7 +123,6 @@ const CustomDrawerContent = (props) => {
           onPress={() => Linking.openURL("http://google.com")}
         />
         <DrawerItem
-          {...props}
           labelStyle={{
             color: "white",
           }}

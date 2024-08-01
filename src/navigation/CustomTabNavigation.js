@@ -10,7 +10,7 @@ import * as en from "../localization/en.json";
 import { getLocales } from "expo-localization";
 const Tab = createMaterialTopTabNavigator();
 
-export const CustomTabNavigation = (props) => {
+export const CustomTabNavigation = () => {
   const translations = {
     fr: fr,
     ["fr-FR"]: fr,

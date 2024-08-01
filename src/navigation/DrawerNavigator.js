@@ -24,7 +24,7 @@ const DrawerNavigator = () => {
           shadowOpacity: 0, // remove shadow on iOS
         },
       }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      drawerContent={() => <CustomDrawerContent />}
     >
       <Drawer.Screen name="Binary Talk" component={MainStackNavigator} />
     </Drawer.Navigator>
