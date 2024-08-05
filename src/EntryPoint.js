@@ -7,7 +7,7 @@ Permet d'avoir un state globable sur NavigationContainer et de changer le thème
 */
 
 import { StatusBar } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
@@ -17,7 +17,7 @@ import { getLocales } from "expo-localization";
 
 import { I18n } from "i18n-js";
 //import notre store Globale
-import Store, { Context } from "./state/store";
+import { Context } from "./state/store";
 // Set the key-value pairs for the different languages you want to support.
 const i18n = new I18n({
   en: { welcome: "Hello" },

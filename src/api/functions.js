@@ -1,4 +1,3 @@
-import React from "react";
 import { Share } from "react-native";
 
 export const onShare = async (text) => {
