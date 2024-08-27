@@ -9,6 +9,9 @@ npm-debug.*
 *.orig.*
 web-build/
 credentials.json
+key_Store.txt
+credentials/*
+credentials\android
 
 
 # macOS
