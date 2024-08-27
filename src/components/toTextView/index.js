@@ -3,13 +3,12 @@ import {
   SafeAreaView,
   Text,
   TextInput,
-  StyleSheet,
   View,
   ScrollView,
   ToastAndroid,
 } from "react-native";
 
-import { _utf8ToBin, _binaryToTxt } from "../../api/conversion";
+import { _binaryToTxt } from "../../api/conversion";
 import * as Clipboard from "expo-clipboard";
 
 import { onShare } from "../../api/functions";
@@ -19,8 +18,9 @@ import { I18n } from "i18n-js";
 import { getLocales } from "expo-localization";
 import * as fr from "../../localization/fr.json";
 import * as en from "../../localization/en.json";
+import { Styles } from "../shared/styles/Styles";
 
-const toTextView = () => {
+const ToTextView = () => {
   const translations = {
     fr: fr,
     ["fr-FR"]: fr,
@@ -34,12 +34,12 @@ const toTextView = () => {
 
   i18n.fallbacks = true;
 
-  defaultData = i18n.t("defaultData.defaultBin");
+  let defaultData = i18n.t("defaultData.defaultBin");
   const [value, onChangeText] = useState(defaultData);
   const [txt, onChangeTxt] = useState("Du texte");
 
-  const copyToClipboard = (txt) => {
-    Clipboard.setString(txt);
+  const copyToClipboard = async (txt) => {
+    await Clipboard.setStringAsync(txt);
   };
 
   const _isBinary = (txt) => {
@@ -69,7 +69,7 @@ const toTextView = () => {
 
   useEffect(() => {
     onChangeTxt(_binaryToTxt(value));
-  });
+  }, [value]);
 
   const clearText = () => {
     onChangeText("");
@@ -96,100 +96,46 @@ const toTextView = () => {
             />
           ) : null}
         </View>
-        <Text>{i18n.t("view.showTxt")}</Text>
-        <ScrollView>
-          <Text style={Styles.textBinaire}>{txt}</Text>
+        <ScrollView style={Styles.scrollContainer}>
+          <Text style={Styles.textConverti}>{txt}</Text>
         </ScrollView>
-      </View>
-      <View style={Styles.subContainerAction}>
-        <FontAwesome.Button
-          disabled={txt ? false : true}
-          backgroundColor="rgba(52, 52, 52, 0)"
-          underlayColor="#bdc3c7"
-          name="copy"
-          title="Copier"
-          color="black"
-          onPress={() => copyToClipboard(txt)}
-        >
-          {i18n.t("actions.copy")}
-        </FontAwesome.Button>
-        <FontAwesome.Button
-          underlayColor="#bdc3c7"
-          backgroundColor="rgba(52, 52, 52, 0)"
-          name="paste"
-          title="Coller"
-          color="black"
-          onPress={fetchCopiedText}
-        >
-          {i18n.t("actions.paste")}
-        </FontAwesome.Button>
-        <FontAwesome.Button
-          disabled={txt ? false : true}
-          backgroundColor="rgba(52, 52, 52, 0)"
-          underlayColor="#bdc3c7"
-          name="share"
-          title="Partager"
-          color="black"
-          onPress={() => onShare(txt)}
-        >
-          {i18n.t("actions.share")}
-        </FontAwesome.Button>
+        <View style={Styles.subContainerAction}>
+          <FontAwesome.Button
+            disabled={txt ? false : true}
+            backgroundColor="rgba(52, 52, 52, 0)"
+            underlayColor="#bdc3c7"
+            name="copy"
+            title="Copier"
+            color="black"
+            onPress={() => copyToClipboard(txt)}
+          >
+            {i18n.t("actions.copy")}
+          </FontAwesome.Button>
+          <FontAwesome.Button
+            underlayColor="#bdc3c7"
+            backgroundColor="rgba(52, 52, 52, 0)"
+            name="paste"
+            title="Coller"
+            color="black"
+            onPress={fetchCopiedText}
+          >
+            {i18n.t("actions.paste")}
+          </FontAwesome.Button>
+          <FontAwesome.Button
+            disabled={txt ? false : true}
+            backgroundColor="rgba(52, 52, 52, 0)"
+            underlayColor="#bdc3c7"
+            name="share"
+            title="Partager"
+            color="black"
+            onPress={() => onShare(txt)}
+          >
+            {i18n.t("actions.share")}
+          </FontAwesome.Button>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
 
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 15,
-    //backgroundColor: "grey",
-  },
-  subContainer: {
-    flex: 1,
-    flexDirection: "column",
-    //backgroundColor: 'blue',
-    alignItems: "center",
-    alignContent: "flex-start",
-    flexGrow: 4,
-  },
-  textInput: {
-    flexShrink: 1,
-    maxHeight: 80,
-    borderBottomColor: "grey",
-    borderBottomWidth: 1,
-    fontSize: 25,
-    flexWrap: "wrap",
-    //backgroundColor: "grey",
-    flexGrow: 1,
-    color: "black",
-  },
-  textBinaire: {
-    color: "black",
-    //debug : color: 'white',
-    fontSize: 15,
-  },
-  subContainerAction: {
-    flex: 1,
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    flexDirection: "row",
-    //backgroundColor: "red",
-  },
-  customTextInputContainer: {
-    justifyContent: "space-between",
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-start",
-  },
-  customTextInput: {
-    //backgroundColor: "blue",
-  },
-  binaryContainer: {
-    //backgroundColor: 'grey',
-    flex: 1,
-    flexWrap: "wrap",
-    flexGrow: 1,
-  },
-});
-export default toTextView;
+export default ToTextView;

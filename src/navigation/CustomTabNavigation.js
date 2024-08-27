@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
-import toBinaryView from "../components/toBinaryView/index";
-import toTextView from "../components/toTextView/index";
+import ToBinaryView from "../components/toBinaryView/index";
+import ToTextView from "../components/toTextView/index";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { I18n } from "i18n-js";
 import * as fr from "../localization/fr.json";
@@ -26,21 +26,21 @@ export const CustomTabNavigation = () => {
   return (
     <Tab.Navigator
       style={styles.container}
-      tabBarOptions={{
-        labelStyle: {
+      screenOptions={{
+        tabBarLabelStyle: {
           fontSize: 12,
         },
-        indicatorStyle: {
+        tabBarItemStyle: {
+          height: 60,
+        },
+        tabBarIndicatorStyle: {
           marginBottom: 5,
           backgroundColor: "white",
         },
-        tabStyle: {
-          height: 60,
-        },
       }}
     >
-      <Tab.Screen name={i18n.t("navigation.toBin")} component={toBinaryView} />
-      <Tab.Screen name={i18n.t("navigation.toTxt")} component={toTextView} />
+      <Tab.Screen name={i18n.t("navigation.toBin")} component={ToBinaryView} />
+      <Tab.Screen name={i18n.t("navigation.toTxt")} component={ToTextView} />
     </Tab.Navigator>
   );
 };

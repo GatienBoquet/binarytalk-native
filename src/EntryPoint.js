@@ -29,7 +29,7 @@ i18n.locale = getLocales()[0].languageCode;
 
 const EntryPoint = () => {
   //utilisation de context pour récupérer le state globale.
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
 
   const allThemes = {
     0: themes.DefaultMyTheme,
@@ -49,11 +49,9 @@ const EntryPoint = () => {
 
   return (
     <NavigationContainer theme={allThemes[state.theme]}>
-      <DrawerNavigator />
+      <DrawerNavigator color={allThemes[state.theme].colors.card} />
     </NavigationContainer>
   );
 };
 
 export default EntryPoint;
-
-const styles = StyleSheet.create({});

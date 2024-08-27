@@ -40,7 +40,7 @@ const ThemeList = (props) => {
         <Text
           style={isSelected[0] ? styles.checkBoxTxtBold : styles.checkBoxTxt}
         >
-          Default - Green
+          Green
         </Text>
       </View>
       <View style={styles.checkBoxView}>
@@ -74,16 +74,21 @@ const ThemeList = (props) => {
 export default ThemeList;
 
 const styles = StyleSheet.create({
-  checkListContainer: {},
+  checkListContainer: {
+    margin: 10,
+  },
   checkBoxView: {
+    padding: 10,
     flexDirection: "row",
     alignItems: "center",
   },
   checkBoxTxtBold: {
     fontSize: 15,
+    margin: 5,
     fontWeight: "bold",
   },
   checkBoxTxt: {
+    margin: 5,
     fontSize: 15,
   },
 });

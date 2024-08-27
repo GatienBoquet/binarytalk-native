@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef, useMemo } from "react";
 import { Context } from "../state/store";
 
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
@@ -10,7 +10,8 @@ import { getLocales } from "expo-localization";
 import * as fr from "../localization/fr.json";
 import * as en from "../localization/fr.json";
 import ThemeList from "../components/ThemeList";
-import _CustomModal from "../components/_shared/_CustomModal";
+import CustomModal from "../components/shared/CustomModal";
+import { useDrawerStatus } from "@react-navigation/drawer";
 /*
 Pour afficher les screens :
 <DrawerItemList {...props} />
@@ -27,7 +28,7 @@ Pour afficher les screens :
 const modalTextTitle = "Binary Talk";
 const modalTextBottom = "Gatien Boquet \n 2024";
 
-const CustomDrawerContent = () => {
+const CustomDrawerContent = ({ color }) => {
   const translations = {
     fr: fr,
     ["fr-FR"]: fr,
@@ -39,16 +40,21 @@ const CustomDrawerContent = () => {
   i18n.locale = getLocales()[0].languageCode ?? "en";
 
   i18n.fallbacks = true;
-  const [modalVisible, setModalVisible] = useState(false);
-  const [themeChangerVisible, setThemeChangerVisible] = useState(false);
 
-  const [isChecked, setChecked] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const themeChangerVisible = useRef(false);
 
   const [lepayload, setlepayload] = useState(0);
 
-  function handleChangeTheme() {
-    setThemeChangerVisible(!themeChangerVisible);
-  }
+  const handleChangeTheme = () => {
+    setIsModalVisible((prevState) => !prevState);
+  };
+
+  console.log(themeChangerVisible.current + " - re render");
+
   const [state, dispatch] = useContext(Context);
 
   //dispatch ici l'action d'update le store globable
@@ -57,30 +63,37 @@ const CustomDrawerContent = () => {
     setlepayload(d);
   }
 
+  function handleChange() {
+    setModalVisible(!modalVisible);
+  }
+
   //dispatch uniquement quand le payload est modifié.
   useEffect(() => {
     let payload = lepayload;
     dispatch({ type: "UPDATE_THEME", payload });
   }, [lepayload]);
 
-  const _ModalTheme = ({ handleChange }) => {
-    return (
-      <_CustomModal visible={themeChangerVisible}>
-        <Text style={styles.modalText}>{i18n.t("view.changeTheme")}</Text>
-        <ThemeList changeTheme={changeTheme} />
-        <Pressable
-          style={[styles.button, styles.buttonClose]}
-          onPress={() => handleChange(!themeChangerVisible)}
+  const Modal_Theme = useMemo(() => {
+    const ModalComponent = ({ isVisible, onClose, color }) => {
+      return (
+        <CustomModal
+          isVisible={isVisible}
+          onClose={onClose}
+          colorButton={color}
         >
-          <Text style={styles.textStyle}>{i18n.t("drawer.actionModal")}</Text>
-        </Pressable>
-      </_CustomModal>
-    );
-  };
+          <Text style={styles.modalText}>{i18n.t("view.changeTheme")}</Text>
+          <ThemeList changeTheme={changeTheme} />
+        </CustomModal>
+      );
+    };
 
-  const _ModalAbout = ({ handleChange }) => {
+    ModalComponent.displayName = "Modal_Theme";
+    return ModalComponent;
+  }, []);
+
+  const Modal_About = ({ handleChange }) => {
     return (
-      <_CustomModal visible={modalVisible}>
+      <CustomModal isVisible={modalVisible}>
         <Text style={styles.modalText}>
           {modalTextTitle}
           {"\n"}
@@ -90,18 +103,14 @@ const CustomDrawerContent = () => {
           {"\n"}
         </Text>
         <Pressable
-          style={[styles.button, styles.buttonClose]}
+          style={[styles.button, { backgroundColor: color }]}
           onPress={() => handleChange(!modalVisible)}
         >
           <Text style={styles.textStyle}>{i18n.t("drawer.actionModal")}</Text>
         </Pressable>
-      </_CustomModal>
+      </CustomModal>
     );
   };
-
-  function handleChange() {
-    setModalVisible(!modalVisible);
-  }
 
   return (
     <DrawerContentScrollView style={styles.container}>
@@ -127,14 +136,14 @@ const CustomDrawerContent = () => {
             color: "white",
           }}
           label={"Change theme"}
-          onPress={() => setThemeChangerVisible(true)}
+          onPress={() => handleChangeTheme()}
         />
 
-        <_ModalAbout handleChange={handleChange} visible={modalVisible} />
-        <_ModalTheme
-          handleChange={handleChangeTheme}
-          visible={themeChangerVisible}
-          changeTheme={changeTheme}
+        <Modal_About handleChange={handleChange} isVisible={false} />
+        <Modal_Theme
+          onClose={handleChangeTheme}
+          isVisible={isModalVisible}
+          color={color}
         />
       </View>
     </DrawerContentScrollView>

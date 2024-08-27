@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
 import EntryPoint from "./src/EntryPoint";
+import "@expo/metro-runtime";
 /*
 Binary Talk 3.0 remade with React Native
 https://github.com/GatienBoquet
